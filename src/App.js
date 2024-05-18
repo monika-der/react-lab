@@ -11,7 +11,7 @@ function App() {
     let message;
     if (email.length < 10) {
         message = <div>Email jest krótszy niż 5 znaków</div>
-    } else if (email.length < 15) {
+    } else if (email.length < 25) {
         message = <div>Email jest w sam raz</div>
     } else {
         message = <div>Email jest za długi</div>
