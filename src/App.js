@@ -1,18 +1,20 @@
 import './App.css';
+import "milligram";
 import {useState} from "react";
 
 function App() {
-    const [email, setEmail] = useState('monika@gmail.com');
+    const [email, setEmail] = useState('');
     const [state, setState] = useState(false);
 
     let content;
     if (!state) {
         content = <div>
-            Zaloguj się e-mailem
+            <h1>Zaloguj się e-mailem
                 <input type="text" onChange={handleChange} />
-                <button type="button" onClick={() => setState(true)}>
+                <button type="button" onClick={checkEmail}>
                     Wchodzę
                 </button>
+            </h1>
         </div>
     } else {
         content = <div>
@@ -22,6 +24,19 @@ function App() {
 
     function handleChange(event) {
         setEmail(event.target.value);
+    }
+
+    function checkEmail() {
+        let message;
+        if (email.length < 10) {
+            message = "Email jest krótszy niż 10 znaków"
+        } else if (email.length > 25) {
+            message = "Email jest za długi"
+        } else {
+            message = "Email jest w porządku"
+            setState(true)
+        }
+        alert(message)
     }
 
     return (
