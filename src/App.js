@@ -1,42 +1,27 @@
 import './App.css';
 import "milligram";
+import LoginForm from "./LoginForm";
 import {useState} from "react";
 
 function App() {
-    const [email, setEmail] = useState('');
-    const [state, setState] = useState(false);
+    const [authUser, setAuthUser] = useState('');
+
+    function logOut() {
+        setAuthUser('');
+    }
 
     let content;
-    if (!state) {
+    if (authUser) {
         content = <div>
-            <h1>Zaloguj się e-mailem
-                <input type="text" onChange={handleChange} />
-                <button type="button" onClick={checkEmail}>
-                    Wchodzę
-                </button>
-            </h1>
+            <h1>Twój e-mail to {authUser}</h1>
+            <button onClick={(logOut) => setAuthUser('')}>Wyloguj</button>
         </div>
     } else {
         content = <div>
-            <h1>Twój e-mail to {email}</h1>
-        </div>
-    }
-
-    function handleChange(event) {
-        setEmail(event.target.value);
-    }
-
-    function checkEmail() {
-        let message;
-        if (email.length < 10) {
-            message = "Email jest krótszy niż 10 znaków"
-        } else if (email.length > 25) {
-            message = "Email jest za długi"
-        } else {
-            message = "Email jest w porządku"
-            setState(true)
-        }
-        alert(message)
+            <LoginForm
+                onLogin={(email) => setAuthUser(email)}
+                buttonLabel=""/>
+        </div>;
     }
 
     return (
